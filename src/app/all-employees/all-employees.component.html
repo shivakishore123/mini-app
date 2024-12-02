@@ -1,1 +1,65 @@
-<p>all-employees works!</p>
+<input type="text" placeholder="search"[(ngModel)]="term" (keyup)="filter()">
+
+<select  [(ngModel)]="column">
+    <option>company</option>
+    <option>role</option>
+    <option>package</option>
+</select>
+<select  [(ngModel)]="order">
+    <option>asc</option>
+    <option>desc</option>
+</select>
+<button (click)="sort()">sort</button>
+
+<select  [(ngModel)]="limit">
+    <option>10</option>
+    <option>20</option>
+    <option>50</option>
+</select>
+<select  [(ngModel)]="page">
+    <option>1</option>
+    <option>2</option>
+    <option>3</option>
+</select>
+<button (click)="pagination()">pagination</button>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Company</th>
+            <th>Role</th>
+            <th>Package</th>
+            <th>DOB</th>
+            <th>Action</th>
+            <th>id</th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- <tr *ngFor="let employee of employees"[ngStyle]="{'text-danger':employee.package<900000,'text-success':employee.package>=900000}">
+            <td>{{employee.name}}</td>
+            <td>{{employee.company}}</td>
+            <td>{{employee.role}}</td>
+            <td >{{employee.package}}</td>
+            <td>{{employee.dob}}</td>
+            <td>{{employee.id}}</td>
+            <td>
+                <button (click)="delete(employee.id)" class="btn btn-danger">Delete</button>
+            </td>
+        </tr> -->
+        <ng-container *ngFor="let employee of employees">
+            <tr *ngIf="employee.package > 500000">
+              <td>{{employee.name}}</td>
+              <td>{{employee.company}}</td>
+              <td>{{employee.role}}</td>
+              <td>{{employee.package}}</td>
+              <td>{{employee.dob}}</td>
+              <td>{{employee.id}}</td>
+              <td>
+                <button (click)="delete(employee.id)" class="btn btn-danger">Delete</button>
+              </td>
+            </tr>
+          </ng-container>
+          
+    </tbody>
+</table>

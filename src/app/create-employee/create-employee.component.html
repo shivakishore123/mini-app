@@ -1,1 +1,73 @@
 <p>create-employee works!</p>
+
+<form [formGroup]="employeeForm">
+    <label >Name:</label>
+    <input type="text" formControlName="name">
+    <br>
+    <label >Company:</label>
+    <input type="text" formControlName="company">
+    <br>
+    <label >Role:</label>
+    <input type="text" formControlName="role">
+    <br>
+    <label >Package:</label>
+    <input type="number" formControlName="package">
+    <br>
+    <label >Email:</label>
+    <input type="text" formControlName="email">
+    <br>
+    <label >Dob:</label>
+    <input type="date" formControlName="dob">
+    <br>
+    <div formGroupName="address">
+        <label>Address:</label>
+        <input type="text" formControlName="addressLine">
+        <br>
+        <label>City:</label>
+        <input type="text" formControlName="city">
+        <br>
+        <label>State:</label>
+        <input type="text" formControlName="state">
+        <br>
+        <label>Pincode:</label>
+        <input type="number" formControlName="pincode">
+        <br>
+    </div>
+    <label>WorkMode:</label>
+    <input type="radio" name="workMode" formControlName="workMode" value="work-from-office">
+    <label >Work Frm office:</label>
+    <input type="radio" name="workMode" formControlName="workMode" value="remote">
+    <label >Remote:</label>
+    <br>
+
+    <div *ngIf="employeeForm.get('workMode')?.value=='work-from-office'">
+        <label for="">Travel Fee</label>
+        <input type="number" formControlName="travelfee">
+        <br>
+    </div>
+
+    <div *ngIf="employeeForm.get('workMode')?.value=='remote'">
+        <label for="">Wifi Bill</label>
+        <input type="number" formControlName="wifibill">
+        <br>
+    </div>
+
+    <label >Hikes:</label>
+    <button class="btn btn-info" (click)="hikes()">Hikes</button>
+    <br>
+
+    <div formArrayName="hikes">
+        <div *ngFor="let hike of hikesFormArray.controls;let i=index">
+            <div formGroupName="{{i}}">
+
+                <h2>Hike {{i+1}}</h2>
+                <label>Year:</label>
+                <input type="number" formControlName="year">
+
+                <label>Percentage:</label>
+                <input type="number" formControlName="percentage">
+            </div>
+        </div>
+    </div>
+        <button (click)="submit()">Submit</button>
+</form>
